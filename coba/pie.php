@@ -1,6 +1,21 @@
-<div id="canvas-holder" style="width:40%">
+<div id="canvas-holder" style="width:90%">
 		<canvas id="chart-area"></canvas>
 	</div>
+	<?php
+		
+		$color = ['red','orange','yellow','green', 'blue','purple','grey'];
+		
+		$data = get_rekap_planet();
+		var_dump($data);
+		$str_value = implode(",", array_values($data));
+		$i = 0; 
+		foreach($data as $asal => $presentase){
+		$str_color[]= "window.chartColors.".$color[$i];
+		$str_kota[]= $asal;
+		$i++;
+		} 
+	?>
+	
 	<script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
 	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 	<script>
@@ -9,23 +24,15 @@
 			data: {
 				datasets: [{
 					data: [
-							20,30,10,15,25,
+							<?php echo $str_value; ?>
 					],
 					backgroundColor: [
-						window.chartColors.red,
-						window.chartColors.orange,
-						window.chartColors.yellow,
-						window.chartColors.green,
-						window.chartColors.blue,
+						<?php echo implode(",",$str_color);?>
 					],
 					label: 'Dataset 1'
 				}],
 				labels: [
-					'Red',
-					'Orange',
-					'Yellow',
-					'Green',
-					'Blue'
+					'<?php echo implode("','",$str_kota);?>'
 				]
 			},
 			options: {
@@ -37,4 +44,5 @@
 			var ctx = document.getElementById('chart-area').getContext('2d');
 			window.myPie = new Chart(ctx, config);
 		};
-	<script>
+		
+	</script>

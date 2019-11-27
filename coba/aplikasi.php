@@ -1,7 +1,7 @@
 <?php
     function connect_to_db()
     {
-            $conn =mysqli_connect('localhost',"root","root","tatasurya");
+            $conn =mysqli_connect('localhost',"root","","tatasurya");
         
         if($conn == false)
         {
@@ -23,6 +23,23 @@ function select_db($sql)
 function get_thread($id_planet){
     $sql = "SELECT id, nama, jarak, deskripsi, waktu_rotasi FROM `planet` WHERE id_planet = ".$id_planet;
     $data = do_query($sql);
+    return $data;
+}
+
+function get_rekap_planet(){
+    $conn =connect_to_db();
+    $sql = "SELECT COUNT(*) as num,nama FROM planet GROUP BY nama";
+    $query = mysqli_query($conn,$sql);
+    $data = [];
+    while($row = mysqli_fetch_array($query)) 
+    {
+        $data[$row['nama']] = $row['num'];
+    }
+    $total = array_sum($data);
+    foreach($data as $nama => $num)
+    {
+        $data[$nama]= round($num*100/$total,2);
+    }
     return $data;
 }
 

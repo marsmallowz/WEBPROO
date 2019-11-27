@@ -1,7 +1,7 @@
 <?php
     function connect_to_db()
     {
-            $conn =mysqli_connect('localhost',"root","root","coba");
+            $conn =mysqli_connect('localhost',"root","","coba");
         
         if($conn == false)
         {
@@ -61,9 +61,9 @@ function get_menu($id_level){
 
 function get_rekap_asal(){
     $conn =connect_to_db();
-    $sql = "SELECT COUNT(*) as num,alamat FROM GROUP BY alamat";
+    $sql = "SELECT COUNT(*) as num,alamat FROM mahasiswa GROUP BY alamat";
     $query = mysqli_query($conn,$sql);
-    $data = array();
+    $data = [];
     while($row = mysqli_fetch_array($query)) 
     {
         $data[$row['alamat']] = $row['num'];
@@ -71,7 +71,7 @@ function get_rekap_asal(){
     $total = array_sum($data);
     foreach($data as $alamat => $num)
     {
-        $data[alamat]= round($num*100/$total,2);
+        $data[$alamat]= round($num*100/$total,2);
     }
     return $data;
 }

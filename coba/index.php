@@ -22,7 +22,7 @@
             <li><a href="index.php?page=saturnus"><i ></i>Saturnus</a></li>
             <li><a href="index.php?page=merkurius"><i ></i>Merkurius</a></li>
             <li><a href="index.php?page=neptunus"><i ></i>Neptunus</a></li>
-
+            <li><a href="index.php?page=pie"><i ></i>Chart</a></li>
             <li><a href="index.php?page=pengaturan"><i ></i>Pengaturan</a></li>
         </ul> 
         <div class="social_media">
